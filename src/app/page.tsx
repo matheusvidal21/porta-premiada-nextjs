@@ -1,95 +1,35 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
 import styles from "./page.module.css";
+import Cartao from "@/components/cartao/Cartao";
+import EntradaNumerica from "@/components/EntradaNumerica/EntradaNumerica";
+import { useState } from "react";
 
-export default function Home() {
+export default function Formulario() {
+  const [qtdPortas, setQtdPortas] = useState<number>(3);
+  const [portaComPresente, setPortaComPresente] = useState<number>(1);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className={styles.formulario}>
+      <div>
+        <Cartao bgColor="#c0392c">
+          <h1>Monty Hall</h1>
+        </Cartao>
+        <Cartao>
+          <EntradaNumerica text="Qtd Portas?" value={qtdPortas} onChange={novaQtd => setQtdPortas(novaQtd)}/>
+        </Cartao>
+      </div>
+      <div>
+        <Cartao>
+          <EntradaNumerica text="Porta com presente?" value={portaComPresente} onChange={novaPortaComPresente => setPortaComPresente(novaPortaComPresente)}/>
+        </Cartao>
+        <Cartao bgColor="#28a085">
+          <Link href={`/jogo/${qtdPortas}/${portaComPresente}`} className={styles.link}>
+            <h2>Iniciar</h2>
+          </Link>
+        </Cartao>
+      </div>
     </div>
-  );
+  )
 }
